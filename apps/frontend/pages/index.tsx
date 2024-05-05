@@ -1,8 +1,11 @@
-import { Button } from '@acme/ui'
-import { matchingTextColor, randomColor } from '@acme/utils'
+import { Button } from '@snilli/ui'
+import { matchingTextColor, randomColor } from '@snilli/utils'
 import { Code, Layout, List, Page, Text } from '@vercel/examples-ui'
-import { useEffect, useState } from 'react'
+import { ButtonHTMLAttributes, FC, useEffect, useState } from 'react'
 
+const AButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({ children }) => {
+	return <button>{children}</button>
+}
 export default function Index() {
 	const [bgColor, setBgColor] = useState('')
 	const [textColor, setTextColor] = useState('')
@@ -36,7 +39,18 @@ export default function Index() {
 				</li>
 			</List>
 			{bgColor && textColor && (
-				<Button
+				<>
+					<AButton
+						style={{
+							backgroundColor: bgColor,
+							color: textColor,
+							borderColor: textColor,
+						}}
+						onClick={changeColor}
+					>
+						Change Color
+					</AButton>
+					<Button
 						style={{
 							backgroundColor: bgColor,
 							color: textColor,
@@ -46,6 +60,7 @@ export default function Index() {
 					>
 						Change Color
 					</Button>
+				</>
 			)}
 		</Page>
 	)
