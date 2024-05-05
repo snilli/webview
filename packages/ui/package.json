@@ -6,7 +6,8 @@
 	"private": true,
 	"scripts": {
 		"lint": "TIMING=1 eslint \"**/*.{ts,tsx,js,jsx}\" --fix",
-		"clean": "rm -rf .turbo"
+		"clean": "rm -rf .turbo",
+		"clean-all": "rm -rf .turbo && rm -rf node_modules"
 	},
 	"sideEffects": false,
 	"type": "module",
@@ -33,18 +34,19 @@
 		}
 	},
 	"peerDependencies": {
-		"next": "*",
+		"next": "^14.2.3",
 		"react": "^17.0.0 || ^18.0.0-0",
 		"react-dom": "^17.0.0 || ^18.0.0-0"
 	},
 	"dependencies": {
-		"@swc/helpers": "^0.4.12",
+		"@swc/helpers": "^0.5.11",
 		"clsx": "^1.1.1"
 	},
 	"devDependencies": {
 		"@types/react": "^18.3.1",
 		"@types/react-dom": "^18.3.0",
 		"eslint": "^8.57.0",
-		"typescript": "^5.4.5"
+		"typescript": "^5.4.5",
+		"tailwindcss": "^3.4.3"
 	}
 }
