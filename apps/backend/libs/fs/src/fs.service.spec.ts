@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { jsonPath } from './fs.constant'
 import { FsService } from './fs.service'
+import { getFsToken } from './utils/fs-token'
 
 describe('FsService', () => {
 	let service: FsService
@@ -10,15 +10,15 @@ describe('FsService', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				{
-					provide: jsonPath,
+					provide: getFsToken('json'),
 					useFactory() {
-						return new FsService(jsonPath)
+						return new FsService(getFsToken('json'))
 					},
 				},
 			],
 		}).compile()
 
-		service = module.get<FsService>(jsonPath)
+		service = module.get<FsService>(getFsToken('json'))
 	})
 
 	it('should be defined', () => {

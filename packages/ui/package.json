@@ -39,8 +39,7 @@
 		"react-dom": "^17.0.0 || ^18.0.0-0"
 	},
 	"dependencies": {
-		"@swc/helpers": "^0.5.11",
-		"clsx": "^1.1.1"
+		"@swc/helpers": "^0.5.11"
 	},
 	"devDependencies": {
 		"@types/react": "^18.3.1",

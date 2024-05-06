@@ -82,7 +82,7 @@ export class ScrapeCardService {
 			.slice(1)
 			.map((i, ele) => this.$(ele).text())
 			.toArray() as unknown as string[]
-		let res: Record<string, string> = {}
+		const res: Record<string, string> = {}
 		this.b(a.eq(1).children(), header, res)
 		this.b(a.eq(2).children(), header, res)
 		this.b(a.eq(3).children(), header, res)

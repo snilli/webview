@@ -132,9 +132,6 @@ importers:
       '@snilli/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      clsx:
-        specifier: ^1.1.1
-        version: 1.2.1
       framer-motion:
         specifier: ^11.1.7
         version: 11.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -150,9 +147,6 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-      tailwind-merge:
-        specifier: ^2.3.0
-        version: 2.3.0
       usehooks-ts:
         specifier: ^3.1.0
         version: 3.1.0(react@18.3.1)
@@ -193,9 +187,6 @@ importers:
       '@swc/helpers':
         specifier: ^0.5.11
         version: 0.5.11
-      clsx:
-        specifier: ^1.1.1
-        version: 1.2.1
       next:
         specifier: ^14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -223,6 +214,13 @@ importers:
         version: 5.4.5
 
   packages/utils:
+    dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.3.0
     devDependencies:
       eslint:
         specifier: ^8.57.0
