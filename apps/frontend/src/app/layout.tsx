@@ -1,8 +1,11 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Providers } from './providers'
 
+import { cn } from '@nextui-org/react'
+import { Metadata } from 'next'
+import Layout from './components/Layout'
+import { AppProvider } from './providers/NextUiProvider'
+import { PageProvider } from './providers/PageProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -12,9 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className="dark">
+		<html lang="en" className={cn('dark', inter.className)}>
 			<body>
-				<Providers>{children}</Providers>
+				<AppProvider>
+					<PageProvider>
+						<Layout>{children}</Layout>
+					</PageProvider>
+				</AppProvider>
 			</body>
 		</html>
 	)

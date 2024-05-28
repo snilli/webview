@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,9 +17,13 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "src/",
     "paths": {
       "@app/*": [
-        "src/*"
+        "./app/*"
+      ],
+      "@app-types/*": [
+        "./types/*"
       ]
     },
     "target": "ES2017",
@@ -35,7 +38,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "postcss.config.mjs",
+    "postcss.config.mjs"
   ],
   "exclude": [
     "node_modules"
