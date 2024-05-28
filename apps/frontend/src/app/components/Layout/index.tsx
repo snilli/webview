@@ -1,5 +1,5 @@
 'use client'
-import { sectionItemsWithTeams } from '@app/mock/SidebarItem'
+import { sectionNestedItems } from '@app/mock/SidebarItem'
 import { usePage } from '@app/providers/PageProvider'
 import { Icon } from '@iconify/react'
 import { Avatar, Button, cn, ScrollShadow, Spacer, Tooltip } from '@nextui-org/react'
@@ -64,7 +64,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 						<SidebarMenuList
 							isCompact={isCompactDesktop}
 							defaultSelectedKey="home"
-							items={sectionItemsWithTeams}
+							items={sectionNestedItems}
 						/>
 					</ScrollShadow>
 					<Spacer y={isDesktop ? 2 : 8} />

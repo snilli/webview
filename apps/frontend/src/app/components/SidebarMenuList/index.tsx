@@ -64,6 +64,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 					<ListboxItem
 						{...item}
 						key={item.key}
+						aria-label={item.key}
 						endContent={isCompact || hideEndContent ? null : item.endContent ?? null}
 						startContent={
 							isCompact ? null : item.icon ? (
@@ -83,7 +84,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 						title={isCompact ? null : item.title}
 					>
 						{isCompact ? (
-							<Tooltip content={item.title} placement="right">
+							<Tooltip key={item.key} content={item.title} placement="right">
 								<div className="flex w-full items-center justify-center">
 									{item.icon ? (
 										<Icon
@@ -110,7 +111,6 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 		const renderNestItem = useCallback(
 			(item: SidebarMenuListItem) => {
 				const isNestType = item.items && item.items?.length > 0 && item?.type === SidebarMenuListItemType.Nest
-
 				if (isNestType) {
 					// Is a nest type item , so we need to remove the href
 					delete item.href
@@ -130,6 +130,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 								},
 							),
 						}}
+						aria-label={item.key}
 						endContent={isCompact || isNestType || hideEndContent ? null : item.endContent ?? null}
 						startContent={
 							isCompact || isNestType ? null : item.icon ? (
@@ -148,7 +149,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 						title={isCompact || isNestType ? null : item.title}
 					>
 						{isCompact ? (
-							<Tooltip content={item.title} placement="right">
+							<Tooltip key={`${item.key}-compact`} content={item.title} placement="right">
 								<div className="flex w-full items-center justify-center">
 									{item.icon ? (
 										<Icon
@@ -166,9 +167,8 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 							</Tooltip>
 						) : null}
 						{!isCompact && isNestType ? (
-							<Accordion className={'p-0'}>
+							<Accordion key={`${item.key}-full`} className={'p-0'}>
 								<AccordionItem
-									key={item.key}
 									aria-label={item.title}
 									classNames={{
 										heading: 'pr-3',
@@ -197,6 +197,8 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 								>
 									{item.items && item.items?.length > 0 ? (
 										<Listbox
+											key={item.key}
+											aria-label={item.key}
 											className={'mt-0.5'}
 											classNames={{
 												list: cn('border-l border-default-200 pl-4'),
@@ -251,6 +253,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 					setSelected(key as Key)
 					onSelect?.(key as string)
 				}}
+				aria-label={'sidebar'}
 				{...props}
 			>
 				{(item) => {

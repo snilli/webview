@@ -372,33 +372,33 @@ export const sectionLongList: SidebarMenuListItem[] = [
 
 export const sectionNestedItems: SidebarMenuListItem[] = [
 	{
-		key: 'home',
+		key: 'ahome',
 		href: '#',
 		icon: 'solar:home-2-linear',
 		title: 'Home',
 	},
 	{
-		key: 'projects',
+		key: 'bprojects',
 		href: '#',
 		icon: 'solar:widget-2-outline',
 		title: 'Projects',
 		endContent: <Icon className="text-default-400" icon="solar:add-circle-line-duotone" width={24} />,
 	},
 	{
-		key: 'tasks',
+		key: 'ctasks',
 		href: '#',
 		icon: 'solar:checklist-minimalistic-outline',
 		title: 'Tasks',
 		endContent: <Icon className="text-default-400" icon="solar:add-circle-line-duotone" width={24} />,
 	},
 	{
-		key: 'team',
+		key: 'dteam',
 		href: '#',
 		icon: 'solar:users-group-two-rounded-outline',
 		title: 'Team',
 	},
 	{
-		key: 'tracker',
+		key: 'etracker',
 		href: '#',
 		icon: 'solar:sort-by-time-linear',
 		title: 'Tracker',
@@ -409,13 +409,13 @@ export const sectionNestedItems: SidebarMenuListItem[] = [
 		),
 	},
 	{
-		key: 'analytics',
+		key: 'fanalytics',
 		href: '#',
 		icon: 'solar:chart-outline',
 		title: 'Analytics',
 	},
 	{
-		key: 'perks',
+		key: 'gperks',
 		href: '#',
 		icon: 'solar:gift-linear',
 		title: 'Perks',
@@ -426,25 +426,25 @@ export const sectionNestedItems: SidebarMenuListItem[] = [
 		),
 	},
 	{
-		key: 'cap_table',
+		key: 'hcap_table',
 		title: 'Cap Table',
 		icon: 'solar:pie-chart-2-outline',
 		type: SidebarMenuListItemType.Nest,
 		items: [
 			{
-				key: 'shareholders',
+				key: 'ashareholders',
 				icon: 'solar:users-group-rounded-linear',
 				href: '#',
 				title: 'Shareholders',
 			},
 			{
-				key: 'note_holders',
+				key: 'bnote_holders',
 				icon: 'solar:notes-outline',
 				href: '#',
 				title: 'Note Holders',
 			},
 			{
-				key: 'transactions_log',
+				key: 'ctransactions_log',
 				icon: 'solar:clipboard-list-linear',
 				href: '#',
 				title: 'Transactions Log',
@@ -452,7 +452,7 @@ export const sectionNestedItems: SidebarMenuListItem[] = [
 		],
 	},
 	{
-		key: 'expenses',
+		key: 'iexpenses',
 		href: '#',
 		icon: 'solar:bill-list-outline',
 		title: 'Expenses',

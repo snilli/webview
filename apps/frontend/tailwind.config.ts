@@ -3,7 +3,7 @@ import { dirname, join } from 'path'
 import type { Config } from 'tailwindcss'
 
 const ui = require('@snilli/ui/tailwind')
-console.log(ui)
+
 const config: Config = {
 	presets: [ui],
 	content: [
