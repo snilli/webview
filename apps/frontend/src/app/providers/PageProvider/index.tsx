@@ -1,6 +1,6 @@
 'use client'
 import { useDisclosure } from '@nextui-org/react'
-import { createContext, useContext, useEffect, useMemo } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { PageProviderContext, PageProviderProps } from './interface'
 
@@ -21,11 +21,6 @@ export function PageProvider({ children }: Readonly<PageProviderProps>) {
 	const isDesktop = !isMobile
 	const isCompactMobile = isOpen && isMobile
 	const isCompactDesktop = isOpen && isDesktop
-	useEffect(() => {
-		if (isMobile && isOpen) {
-			onOpenChange()
-		}
-	}, [isMobile, isOpen, onOpenChange])
 
 	const contextValue = useMemo(
 		() => ({

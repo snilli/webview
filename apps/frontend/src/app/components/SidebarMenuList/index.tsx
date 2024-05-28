@@ -149,7 +149,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 						title={isCompact || isNestType ? null : item.title}
 					>
 						{isCompact ? (
-							<Tooltip key={`${item.key}-compact`} content={item.title} placement="right">
+							<Tooltip key={`${item.key}-parent-compact`} content={item.title} placement="right">
 								<div className="flex w-full items-center justify-center">
 									{item.icon ? (
 										<Icon
@@ -167,7 +167,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 							</Tooltip>
 						) : null}
 						{!isCompact && isNestType ? (
-							<Accordion key={`${item.key}-full`} className={'p-0'}>
+							<Accordion key={`${item.key}-parent`} className={'p-0'}>
 								<AccordionItem
 									aria-label={item.title}
 									classNames={{
@@ -197,8 +197,7 @@ const SidebarMenuList = forwardRef<HTMLElement, SidebarMenuListProps>(
 								>
 									{item.items && item.items?.length > 0 ? (
 										<Listbox
-											key={item.key}
-											aria-label={item.key}
+											aria-label={`${item.key}-parent`}
 											className={'mt-0.5'}
 											classNames={{
 												list: cn('border-l border-default-200 pl-4'),
