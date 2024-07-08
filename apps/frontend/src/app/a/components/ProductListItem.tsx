@@ -2,9 +2,10 @@
 
 import { Icon } from '@iconify/react'
 import { Button, Image } from '@nextui-org/react'
-import React from 'react'
+import { forwardRef, useState } from 'react'
 
 import { cn } from '@nextui-org/react'
+import type { HTMLAttributes } from 'react'
 import RatingRadioGroup from './RatingRadioGroup'
 
 export type ProductListItemColor = {
@@ -27,12 +28,12 @@ export type ProductItem = {
 	imageSrc: string
 }
 
-export type ProductListItemProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'id'> & {
+export type ProductListItemProps = Omit<HTMLAttributes<HTMLDivElement>, 'id'> & {
 	isPopular?: boolean
 	removeWrapper?: boolean
 } & ProductItem
 
-const ProductListItem = React.forwardRef<HTMLDivElement, ProductListItemProps>(
+const ProductListItem = forwardRef<HTMLDivElement, ProductListItemProps>(
 	(
 		{
 			name,
@@ -50,7 +51,7 @@ const ProductListItem = React.forwardRef<HTMLDivElement, ProductListItemProps>(
 		},
 		ref,
 	) => {
-		const [isStarred, setIsStarred] = React.useState(false)
+		const [isStarred, setIsStarred] = useState(false)
 		const hasColors = availableColors && availableColors?.length > 0
 
 		return (

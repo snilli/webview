@@ -3,17 +3,17 @@
 import type { RadioGroupProps } from '@nextui-org/react'
 
 import { cn, RadioGroup } from '@nextui-org/react'
-import React from 'react'
+import { forwardRef, useMemo, useState } from 'react'
 import RatingRadioItem from './RatingRadioItem'
 
 export type RatingRadioGroupProps = RadioGroupProps & {
 	hideStarsText?: boolean
 }
 
-const RatingRadioGroup = React.forwardRef<HTMLDivElement, RatingRadioGroupProps>(
+const RatingRadioGroup = forwardRef<HTMLDivElement, RatingRadioGroupProps>(
 	({ className, label, hideStarsText, ...props }, ref) => {
-		const [value, setValue] = React.useState('1')
-		const starsText = React.useMemo(() => {
+		const [value, setValue] = useState('1')
+		const starsText = useMemo(() => {
 			// Special case for 5 stars
 			if (value === '5') {
 				return '5 stars'

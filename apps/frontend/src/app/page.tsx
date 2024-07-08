@@ -7,7 +7,7 @@ export default function Home() {
 		<div className="flex items-center dark h-screen justify-center p-4">
 			<div className="flex h-full w-full items-center justify-center">
 				<div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pb-10 pt-6 shadow-small">
-					<p className="pb-2 text-xl font-medium">Log In</p>
+					<p className="pb-2 text-xl text-primary-foreground font-medium">Log In</p>
 					<form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
 						<Input label="Email Address" name="email" type="email" variant="bordered" />
 						<Button
@@ -34,7 +34,7 @@ export default function Home() {
 							Continue with Github
 						</Button>
 					</div>
-					<p className="text-center text-small">
+					<p className="text-primary-foreground text-center text-small">
 						Need to create an account?&nbsp;
 						<Link href="#" size="sm">
 							Sign Up

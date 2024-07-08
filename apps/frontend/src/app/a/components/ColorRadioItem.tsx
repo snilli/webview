@@ -3,11 +3,11 @@
 import type { RadioProps } from '@nextui-org/react'
 
 import { Tooltip, VisuallyHidden, cn, useRadio } from '@nextui-org/react'
-import React from 'react'
+import { forwardRef } from 'react'
 
 export type ColorRadioItemProps = Omit<RadioProps, 'color'> & { color?: string; tooltip?: string }
 
-const ColorRadioItem = React.forwardRef<HTMLInputElement, ColorRadioItemProps>(({ color, tooltip, ...props }, ref) => {
+const ColorRadioItem = forwardRef<HTMLInputElement, ColorRadioItemProps>(({ color, tooltip, ...props }, ref) => {
 	const { Component, isSelected, isFocusVisible, getBaseProps, getInputProps } = useRadio(props)
 
 	return (

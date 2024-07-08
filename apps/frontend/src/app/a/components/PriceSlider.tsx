@@ -3,7 +3,7 @@
 import type { SliderProps } from '@nextui-org/react'
 
 import { cn, Divider, Input, Slider } from '@nextui-org/react'
-import React from 'react'
+import { FC, forwardRef, useCallback, useMemo, useState } from 'react'
 import { RangeFilter, RangeValue } from './filters.interface'
 
 export type PriceSliderAnimation = 'opacity' | 'height'
@@ -33,12 +33,12 @@ export type PriceSliderPipProps = {
 	animation?: PriceSliderAnimation
 }
 
-const PriceSliderPip: React.FC<PriceSliderPipProps> = ({ animation = 'height', isInRange }) => {
-	const rand = React.useMemo(() => Math.floor(Math.random() * 100), [])
+const PriceSliderPip: FC<PriceSliderPipProps> = ({ animation = 'height', isInRange }) => {
+	const rand = useMemo(() => Math.floor(Math.random() * 100), [])
 
 	const height = clampValue(rand, 30, 100) + '%'
 
-	const pip = React.useMemo(() => {
+	const pip = useMemo(() => {
 		if (animation === 'height') {
 			return (
 				<span
@@ -65,100 +65,97 @@ const PriceSliderPip: React.FC<PriceSliderPipProps> = ({ animation = 'height', i
 	return pip
 }
 
-const PriceSlider = React.forwardRef<HTMLDivElement, PriceSliderProps>(
-	({ range, animation, className, ...props }, ref) => {
-		const defaultValue = React.useMemo<RangeValue>(() => range?.defaultValue || [0, 1000], [range?.defaultValue])
+const PriceSlider = forwardRef<HTMLDivElement, PriceSliderProps>(({ range, animation, className, ...props }, ref) => {
+	const defaultValue = useMemo<RangeValue>(() => range?.defaultValue || [0, 1000], [range?.defaultValue])
 
-		const [value, setValue] = React.useState<RangeValue>(defaultValue)
+	const [value, setValue] = useState<RangeValue>(defaultValue)
 
-		const rangePercentageValue = React.useMemo(() => {
-			const rangeScale = [range?.min || defaultValue[0], range?.max || defaultValue[1]] as RangeValue
+	const rangePercentageValue = useMemo(() => {
+		const rangeScale = [range?.min || defaultValue[0], range?.max || defaultValue[1]] as RangeValue
 
-			const minPercentage = Math.floor(scaleValue(value[0], rangeScale))
-			const maxPercentage = Math.floor(scaleValue(value[1], rangeScale))
+		const minPercentage = Math.floor(scaleValue(value[0], rangeScale))
+		const maxPercentage = Math.floor(scaleValue(value[1], rangeScale))
 
-			return [minPercentage, maxPercentage] as const
-		}, [value, range?.min, range?.max, defaultValue])
+		return [minPercentage, maxPercentage] as const
+	}, [value, range?.min, range?.max, defaultValue])
 
-		const rangePips = React.useMemo(() => {
-			return Array.from({ length: 32 }).map((_, index) => {
-				const pipValuePercentage = Math.round(scaleValue(index, [0, 31]))
+	const rangePips = useMemo(() => {
+		return Array.from({ length: 32 }).map((_, index) => {
+			const pipValuePercentage = Math.round(scaleValue(index, [0, 31]))
 
-				const isInRange =
-					pipValuePercentage >= rangePercentageValue[0] + 5 &&
-					pipValuePercentage <= rangePercentageValue[1] + 2
+			const isInRange =
+				pipValuePercentage >= rangePercentageValue[0] + 5 && pipValuePercentage <= rangePercentageValue[1] + 2
 
-				return <PriceSliderPip key={index} animation={animation} isInRange={isInRange} />
-			})
-		}, [animation, rangePercentageValue])
+			return <PriceSliderPip key={index} animation={animation} isInRange={isInRange} />
+		})
+	}, [animation, rangePercentageValue])
 
-		const onMinInputValueChange = React.useCallback(
-			(inputValue: string) => {
-				const newValue = Number(inputValue)
-				const minValue = range?.min ?? defaultValue[0]
+	const onMinInputValueChange = useCallback(
+		(inputValue: string) => {
+			const newValue = Number(inputValue)
+			const minValue = range?.min ?? defaultValue[0]
 
-				if (!isNaN(newValue)) {
-					const clampedValue = clampValue(newValue, minValue, value[1])
+			if (!isNaN(newValue)) {
+				const clampedValue = clampValue(newValue, minValue, value[1])
 
-					setValue([clampedValue, value[1]])
-				}
-			},
-			[value, range?.min, defaultValue],
-		)
+				setValue([clampedValue, value[1]])
+			}
+		},
+		[value, range?.min, defaultValue],
+	)
 
-		const onMaxInputValueChange = React.useCallback(
-			(inputValue: string) => {
-				const newValue = Number(inputValue)
-				const maxValue = range?.max ?? defaultValue[1]
+	const onMaxInputValueChange = useCallback(
+		(inputValue: string) => {
+			const newValue = Number(inputValue)
+			const maxValue = range?.max ?? defaultValue[1]
 
-				if (!isNaN(newValue) && newValue <= maxValue) {
-					setValue([value[0], newValue])
-				}
-			},
-			[value, range?.max, defaultValue],
-		)
+			if (!isNaN(newValue) && newValue <= maxValue) {
+				setValue([value[0], newValue])
+			}
+		},
+		[value, range?.max, defaultValue],
+	)
 
-		return (
-			<div className={cn('flex flex-col gap-3', className)}>
-				<div className="flex flex-col gap-1">
-					<div className="flex h-12 w-full items-end justify-between px-2">{rangePips}</div>
-					<Slider
-						{...props}
-						ref={ref}
-						formatOptions={{ style: 'currency', currency: 'USD' }}
-						maxValue={range?.max}
-						minValue={range?.min}
-						size="sm"
-						step={range?.step}
-						value={value}
-						onChange={(value) => {
-							setValue(value as RangeValue)
-						}}
-					/>
-				</div>
-				<div className="flex items-center">
-					<Input
-						aria-label="Min price"
-						labelPlacement="outside"
-						startContent={<p className="text-default-400">$</p>}
-						type="number"
-						value={`${value[0]}`}
-						onValueChange={onMinInputValueChange}
-					/>
-					<Divider className="mx-2 w-2" />
-					<Input
-						aria-label="Max price"
-						labelPlacement="outside"
-						startContent={<p className="text-default-400">$</p>}
-						type="number"
-						value={`${value[1]}`}
-						onValueChange={onMaxInputValueChange}
-					/>
-				</div>
+	return (
+		<div className={cn('flex flex-col gap-3', className)}>
+			<div className="flex flex-col gap-1">
+				<div className="flex h-12 w-full items-end justify-between px-2">{rangePips}</div>
+				<Slider
+					{...props}
+					ref={ref}
+					formatOptions={{ style: 'currency', currency: 'USD' }}
+					maxValue={range?.max}
+					minValue={range?.min}
+					size="sm"
+					step={range?.step}
+					value={value}
+					onChange={(value) => {
+						setValue(value as RangeValue)
+					}}
+				/>
 			</div>
-		)
-	},
-)
+			<div className="flex items-center">
+				<Input
+					aria-label="Min price"
+					labelPlacement="outside"
+					startContent={<p className="text-default-400">$</p>}
+					type="number"
+					value={`${value[0]}`}
+					onValueChange={onMinInputValueChange}
+				/>
+				<Divider className="mx-2 w-2" />
+				<Input
+					aria-label="Max price"
+					labelPlacement="outside"
+					startContent={<p className="text-default-400">$</p>}
+					type="number"
+					value={`${value[1]}`}
+					onValueChange={onMaxInputValueChange}
+				/>
+			</div>
+		</div>
+	)
+})
 
 PriceSlider.displayName = 'PriceSlider'
 

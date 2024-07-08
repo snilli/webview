@@ -1,24 +1,24 @@
 import { ListboxProps, ListboxSectionProps } from '@nextui-org/react'
 import type { ReactNode } from 'react'
 
-export enum SidebarMenuListItemType {
+export enum NavbarMenuListItemType {
 	Nest = 'nest',
 }
 
-export type SidebarMenuListItem = {
+export type NavbarMenuListItem = {
 	key: string
 	title: string
 	icon?: string
 	href?: string
-	type?: SidebarMenuListItemType.Nest
+	type?: NavbarMenuListItemType.Nest
 	startContent?: ReactNode
 	endContent?: ReactNode
-	items?: SidebarMenuListItem[]
+	items?: NavbarMenuListItem[]
 	className?: string
 }
 
-export type SidebarMenuListProps = Omit<ListboxProps<SidebarMenuListItem>, 'children'> & {
-	items: SidebarMenuListItem[]
+export type NavbarMenuListProps = Omit<ListboxProps<NavbarMenuListItem>, 'children'> & {
+	items: NavbarMenuListItem[]
 	isCompact?: boolean
 	hideEndContent?: boolean
 	iconClassName?: string

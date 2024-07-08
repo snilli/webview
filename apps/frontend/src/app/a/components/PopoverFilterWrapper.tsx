@@ -4,14 +4,15 @@ import type { PopoverProps } from '@nextui-org/react'
 
 import { Icon } from '@iconify/react'
 import { Button, Divider, Popover, PopoverContent, PopoverTrigger, useDisclosure } from '@nextui-org/react'
-import React from 'react'
+import type { ReactNode } from 'react'
+import { forwardRef } from 'react'
 
 export type PopoverFilterWrapperProps = Omit<PopoverProps, 'children'> & {
 	title?: string
-	children: React.ReactNode
+	children: ReactNode
 }
 
-const PopoverFilterWrapper = React.forwardRef<HTMLDivElement, PopoverFilterWrapperProps>(
+const PopoverFilterWrapper = forwardRef<HTMLDivElement, PopoverFilterWrapperProps>(
 	({ title, children, ...props }, ref) => {
 		const { isOpen, onClose, onOpenChange } = useDisclosure()
 

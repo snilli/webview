@@ -4,9 +4,9 @@ import type { RadioProps } from '@nextui-org/react'
 
 import { Icon } from '@iconify/react'
 import { VisuallyHidden, cn, useRadio, useRadioGroupContext } from '@nextui-org/react'
-import React from 'react'
+import { forwardRef, useMemo } from 'react'
 
-const RatingRadioItem = React.forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
+const RatingRadioItem = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
 	const { Component, isSelected: isSelfSelected, isFocusVisible, getBaseProps, getInputProps } = useRadio(props)
 
 	const groupContext = useRadioGroupContext()
@@ -16,7 +16,7 @@ const RatingRadioItem = React.forwardRef<HTMLInputElement, RadioProps>((props, r
 	const size = props.size || groupContext.size || 'md'
 	const color = props.color || groupContext.color || 'primary'
 
-	const starWidth = React.useMemo(() => {
+	const starWidth = useMemo(() => {
 		switch (size) {
 			case 'sm':
 				return 16
@@ -27,7 +27,7 @@ const RatingRadioItem = React.forwardRef<HTMLInputElement, RadioProps>((props, r
 		}
 	}, [size])
 
-	const starColor = React.useMemo(() => {
+	const starColor = useMemo(() => {
 		switch (color) {
 			case 'primary':
 				return 'text-primary'
